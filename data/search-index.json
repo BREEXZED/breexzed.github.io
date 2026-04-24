@@ -1,79 +1,79 @@
 {
-  "generated": "2026-04-21T00:46:54.845Z",
+  "generated": "2026-04-24T04:24:38.840Z",
   "nodeCount": 13,
   "indexedCount": 12,
   "docs": [
     {
       "id": "trail_learning_note",
       "title": "Learning Note",
-      "desc": "A trail that marks the edge where confusion sharpened into a useful question and that question became a stable point of return.",
-      "markdown": "A trail that marks the edge where confusion sharpened into a useful question and that question became a stable point of return.\n",
+      "desc": "This trail marks the moment when confusion became precise enough to be useful. A vague uncertainty turned into a question I could actually return to, test, and let reorganize what I thought I understood.",
+      "markdown": "This trail marks the moment when confusion became precise enough to be useful. A vague uncertainty turned into a question I could actually return to, test, and let reorganize what I thought I understood.\n\nI keep this note because learning rarely announces itself as mastery. More often it begins as a tolerable form of disorientation, and this trail is proof of that beginning.\n",
       "tags": "learning trail",
       "type": "trail",
       "formula": "trace -> learning",
       "domain": "learning",
       "signalStatus": "",
-      "sourceRef": "trails/learning-note.md"
+      "sourceRef": "reading margin"
     },
     {
       "id": "trail_entropy_note",
       "title": "Entropy Note",
-      "desc": "A small trail confirming that entropy is not an abstract idea here but a recurring pressure visible in everyday experience, mood, and environment.",
-      "markdown": "A small trail confirming that entropy is not an abstract idea here but a recurring pressure visible in everyday experience, mood, and environment.\n",
+      "desc": "I noticed this trail through the ordinary evidence of things slipping out of ideal form: a room requiring reordering, attention fragmenting under pressure, plans losing coherence faster than expected. None of it was dramatic, but all of it carried the same signature.",
+      "markdown": "I noticed this trail through the ordinary evidence of things slipping out of ideal form: a room requiring reordering, attention fragmenting under pressure, plans losing coherence faster than expected. None of it was dramatic, but all of it carried the same signature.\n\nWhat made it worth keeping was the repetition. Entropy was not showing up as an abstraction to think about later. It was already present as a pressure shaping the texture of the day.\n",
       "tags": "entropy trail",
       "type": "trail",
       "formula": "trace -> entropy",
       "domain": "entropy",
       "signalStatus": "",
-      "sourceRef": "trails/entropy-note.md"
+      "sourceRef": "field observation"
     },
     {
       "id": "trail_coordination_note",
       "title": "Coordination Note",
-      "desc": "A confirming trace that mutual understanding leaves behind structure: repeated language, smoother handoff, less friction, and a clearer shared direction.",
-      "markdown": "A confirming trace that mutual understanding leaves behind structure: repeated language, smoother handoff, less friction, and a clearer shared direction.\n",
+      "desc": "This trail came from a moment where conversation stopped feeling like negotiation and began to feel like alignment. Vocabulary settled, timing improved, and what each person meant became easier to hand over without losing the thread.",
+      "markdown": "This trail came from a moment where conversation stopped feeling like negotiation and began to feel like alignment. Vocabulary settled, timing improved, and what each person meant became easier to hand over without losing the thread.\n\nI keep it as a trace because co-ordination often disappears the moment it succeeds. The note is a way of holding onto the structure it leaves behind.\n",
       "tags": "coordination trail",
       "type": "trail",
       "formula": "trace -> coordination",
       "domain": "coordination",
       "signalStatus": "",
-      "sourceRef": "trails/coordination-note.md"
+      "sourceRef": "conversation fragment"
     },
     {
       "id": "learning_edge",
       "title": "Learning Edge",
-      "desc": "The learning edge is the moment where not knowing becomes productive instead of humiliating, and uncertainty begins to function as a route rather than a stop sign.",
-      "markdown": "The learning edge is the moment where not knowing becomes productive instead of humiliating, and uncertainty begins to function as a route rather than a stop sign.\n\nLinked trail:\n- [Learning Note](../trails/learning-note.md)\n",
+      "desc": "The learning edge is the point at which not knowing stops feeling like a private embarrassment and starts behaving like a live route. It appears when confusion sharpens into a usable question, and when the question begins to reorganize the way I look, read, test, and return.",
+      "markdown": "The learning edge is the point at which not knowing stops feeling like a private embarrassment and starts behaving like a live route. It appears when confusion sharpens into a usable question, and when the question begins to reorganize the way I look, read, test, and return.\n\nI keep this signal close because it is one of the few states that reliably changes me. It is where I can feel understanding beginning, not as certainty, but as contact.\n\nLinked trail:\n- [Learning Note](../trails/learning-note.md)\n",
       "tags": "learning epistemics",
       "type": "signal",
       "formula": "ignorance -> inquiry",
       "domain": "learning",
       "signalStatus": "emerging",
-      "sourceRef": "signals/learning-edge.md"
+      "sourceRef": ""
     },
     {
       "id": "entropy_window",
       "title": "Entropy Window",
-      "desc": "Entropy keeps reappearing as a direct reminder that life is not fully domesticated by plans, categories, or ideals of coherence.",
-      "markdown": "Entropy keeps reappearing as a direct reminder that life is not fully domesticated by plans, categories, or ideals of coherence.\n\nLinked trail:\n- [Entropy Note](../trails/entropy-note.md)\n",
+      "desc": "Entropy keeps returning to me as a signal that reality never fully agrees to remain organized for long. It appears whenever systems fray at the edges: in rooms that drift toward disorder, in moods that resist neat naming, and in structures that reveal their cost the moment maintenance stops.",
+      "markdown": "Entropy keeps returning to me as a signal that reality never fully agrees to remain organized for long. It appears whenever systems fray at the edges: in rooms that drift toward disorder, in moods that resist neat naming, and in structures that reveal their cost the moment maintenance stops.\n\nI keep this signal because it helps me read decay without treating decay as failure. Sometimes entropy is loss; sometimes it is exposure. Either way, it tells the truth about what a thing demands in order to keep existing.\n\nLinked trail:\n- [Entropy Note](../trails/entropy-note.md)\n",
       "tags": "entropy observation",
       "type": "signal",
       "formula": "disorder -> contact",
       "domain": "entropy",
       "signalStatus": "confirmed",
-      "sourceRef": "signals/entropy-window.md"
+      "sourceRef": ""
     },
     {
       "id": "coordination_window",
       "title": "Coordination Window",
-      "desc": "Coordination appears as a signal whenever separate perspectives briefly find enough structure to act together without collapsing into sameness.",
-      "markdown": "Coordination appears as a signal whenever separate perspectives briefly find enough structure to act together without collapsing into sameness.\n\nLinked trail:\n- [Coordination Note](../trails/coordination-note.md)\n",
+      "desc": "Coordination arrives as a signal whenever separate minds, roles, or temperaments find enough mutual structure to move together without becoming identical. I notice it in small handoffs, in recurring language, in timing, and in the strange relief that comes when understanding no longer has to be forced.",
+      "markdown": "Coordination arrives as a signal whenever separate minds, roles, or temperaments find enough mutual structure to move together without becoming identical. I notice it in small handoffs, in recurring language, in timing, and in the strange relief that comes when understanding no longer has to be forced.\n\nThis signal matters to me because co-ordination is one of the few places where thought becomes visible in public. When it appears, it leaves behind a shape that can be studied, repeated, or broken.\n\nLinked trail:\n- [Coordination Note](../trails/coordination-note.md)\n",
       "tags": "coordination systems",
       "type": "signal",
       "formula": "relation -> mutual understanding",
       "domain": "coordination",
       "signalStatus": "emerging",
-      "sourceRef": "signals/coordination-window.md"
+      "sourceRef": ""
     },
     {
       "id": "systems_as_world",
@@ -85,7 +85,7 @@
       "formula": "world -> systems -> pattern",
       "domain": "systems",
       "signalStatus": "",
-      "sourceRef": "concepts/systems-as-world.md"
+      "sourceRef": ""
     },
     {
       "id": "knowing_and_knowledge",
@@ -97,7 +97,7 @@
       "formula": "contact -> inference -> knowledge",
       "domain": "epistemics",
       "signalStatus": "",
-      "sourceRef": "concepts/knowing-and-knowledge.md"
+      "sourceRef": ""
     },
     {
       "id": "being_in_the_world",
@@ -109,7 +109,7 @@
       "formula": "being -> world -> relation",
       "domain": "ontology",
       "signalStatus": "",
-      "sourceRef": "concepts/being-in-the-world.md"
+      "sourceRef": ""
     },
     {
       "id": "world_as_systems",
@@ -121,7 +121,7 @@
       "formula": "relation -> structure -> navigation",
       "domain": "systems",
       "signalStatus": "",
-      "sourceRef": "articulations/world-as-systems.md"
+      "sourceRef": "field-note"
     },
     {
       "id": "knowledge_in_motion",
@@ -133,7 +133,7 @@
       "formula": "knowledge -> move -> live",
       "domain": "epistemics",
       "signalStatus": "",
-      "sourceRef": "articulations/knowledge-in-motion.md"
+      "sourceRef": "working-thesis"
     },
     {
       "id": "constraints_and_becoming",
@@ -145,7 +145,7 @@
       "formula": "constraint != end",
       "domain": "philosophy",
       "signalStatus": "",
-      "sourceRef": "articulations/constraints-and-becoming.md"
+      "sourceRef": "manifesto"
     }
   ]
 }

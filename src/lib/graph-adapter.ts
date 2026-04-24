@@ -1,6 +1,7 @@
 import type { GraphContracts, GraphContractsInput, GraphEdgeView, GraphTypeColorTokens, Node } from '@/types';
 
 const TYPE_COLORS: GraphTypeColorTokens = {
+  root: '#f2f9ff',
   note: '#8ba2bf',
   essay: '#7ea4c9',
   page: '#8f9cbf',

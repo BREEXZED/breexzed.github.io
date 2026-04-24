@@ -19,7 +19,9 @@ tags:
   - coordination
   - systems
 ---
-Coordination appears as a signal whenever separate perspectives briefly find enough structure to act together without collapsing into sameness.
+Coordination arrives as a signal whenever separate minds, roles, or temperaments find enough mutual structure to move together without becoming identical. I notice it in small handoffs, in recurring language, in timing, and in the strange relief that comes when understanding no longer has to be forced.
+
+This signal matters to me because co-ordination is one of the few places where thought becomes visible in public. When it appears, it leaves behind a shape that can be studied, repeated, or broken.
 
 Linked trail:
 - [Coordination Note](../trails/coordination-note.md)

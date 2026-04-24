@@ -8,6 +8,9 @@ The current seeded corpus starts from scratch with the active ontology:
 - `signal`
 - `trail`
 
+The structural shell node uses:
+- `root`
+
 `projects` is still supported by the compiler and runtime for future publishing and backward compatibility, but it is not used by the current seeded corpus.
 
 Legacy node tokens remain supported in code for compatibility:
@@ -23,9 +26,10 @@ Canonical behavior details live in [docs/SYSTEM_SPEC.md](/C:/Users/Owl/Owlcyon/t
 ## Current Status
 
 - Single-page home with dedicated route views for `Home`, `Map`, `Corpus`, `Signal`, and `Projects`
+- Dedicated node pages live at `/node/:id`
 - Graph canvas is live and synchronized with explorer state
 - `/map` defaults to Graph view
-- `/node/:id` falls back to Map Explorer detail view
+- `/node/:id` is the canonical reading surface for any node
 - Search is published-only and type-aware
 - Seed corpus now builds entirely from `concept`, `articulation`, `signal`, and `trail`
 
@@ -71,7 +75,7 @@ Hash links are also normalized at runtime for compatibility.
 - `/map` opens the graph by default
 - Map surface can toggle between `Graph` and `Map Explorer`
 - Clicking a graph node routes to `/node/:id`
-- `/node/:id` opens the explorer/detail surface so content remains canonical
+- `/node/:id` opens the dedicated node page
 - Graph layout is cached in localStorage to avoid re-running layout work on every load
 
 ## Build Pipeline
@@ -118,6 +122,7 @@ connects:
 type: concept
 status: published
 domain: ontology
+source: working-thesis
 tags:
   - philosophy
 ```
@@ -195,8 +200,12 @@ Copy one of these files when publishing a new node from scratch:
 - Keep node IDs lowercase and stable
 - Use `children` for tree structure
 - Use `connects` for cross-links and graph relationships
+- `source` is authored provenance for trails/articulations and any node that needs it
+- `sourcePath` is compiler-owned metadata written into `topology.json`; do not author it by hand
 - The current compiler treats body markdown links as inferred `children` only when neither `children` nor `connects` is explicitly authored
 - Published-only discovery is a hard rule for search and public listing
+
+For the full posting and update workflow, read [docs/AUTHORING.md](/C:/Users/Owl/Owlcyon/the_topology_of_being/docs/AUTHORING.md).
 
 ## Repo Structure
 
@@ -216,6 +225,8 @@ Copy one of these files when publishing a new node from scratch:
   Generated public artifacts
 - `docs/`
   Current system specification and migration notes
+- `src/config/site.ts`
+  Footer social/account configuration
 
 ## Legacy / Historical Files
 
@@ -234,6 +245,7 @@ The expected baseline checks are:
 npm run build:content
 npx tsc --noEmit
 npm run build
+npm run smoke
 ```
 
 And the key interaction scenarios to verify are:

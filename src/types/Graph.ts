@@ -3,6 +3,7 @@ import type { Node, NodeType } from './Node';
 export type GraphInteractionMode = 'touch-first' | 'keyboard-first' | 'hybrid';
 
 export interface GraphTypeColorTokens {
+  root: string;
   note: string;
   essay: string;
   page: string;

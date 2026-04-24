@@ -75,10 +75,35 @@ export function sanitizeHtml(html: string): string {
   return doc.body.innerHTML;
 }
 
-export function markdownHrefToNodeId(href: string): string {
-  return href
-    .replace(/\.\.\//g, '')
-    .replace(/\.\//g, '')
-    .replace('/index.md', '')
-    .replace('.md', '');
+function stripMarkdownHref(href: string): string {
+  const [withoutHash] = String(href || '').split('#');
+  const [withoutQuery] = withoutHash.split('?');
+  return withoutQuery.trim();
+}
+
+export function resolveMarkdownHrefToSourcePath(currentSourcePath: string, href: string): string | null {
+  const normalizedHref = stripMarkdownHref(href);
+  if (!normalizedHref || !normalizedHref.toLowerCase().endsWith('.md')) return null;
+
+  const lowerHref = normalizedHref.toLowerCase();
+  if (
+    lowerHref.startsWith('http://') ||
+    lowerHref.startsWith('https://') ||
+    lowerHref.startsWith('mailto:') ||
+    lowerHref.startsWith('tel:')
+  ) {
+    return null;
+  }
+
+  if (normalizedHref.startsWith('/')) {
+    const fromRoot = normalizedHref.replace(/^\/+/, '');
+    return decodeURIComponent(fromRoot.startsWith('nodes/') ? fromRoot.slice('nodes/'.length) : fromRoot);
+  }
+
+  if (!currentSourcePath) return null;
+
+  const base = new URL(`https://breexzed.local/nodes/${currentSourcePath}`);
+  const resolved = new URL(normalizedHref, base).pathname;
+  if (!resolved.startsWith('/nodes/')) return null;
+  return decodeURIComponent(resolved.slice('/nodes/'.length));
 }

@@ -4,7 +4,7 @@ title: BREEXZED / Home
 label: breexzed
 formula: becoming -> traces -> understanding
 depth: 0
-type: concept
+type: root
 glyph: ◈
 children:
   - being_in_the_world

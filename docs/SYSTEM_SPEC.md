@@ -81,6 +81,7 @@ Per-node core fields:
 - `tags`
 - `date`
 - `source`
+- `sourcePath`
 - `type`
 - `featured`
 - `thumbnail`
@@ -97,9 +98,14 @@ Trail fields:
 - `source`
 - `date_of_discovery`
 
+`source` is authored provenance.
+
+`sourcePath` is compiler-generated file metadata used for runtime link resolution and asset rewriting.
+
 ## 5. Active Ontology
 
 Active seeded corpus types:
+- `root`
 - `concept`
 - `articulation`
 - `signal`
@@ -123,14 +129,14 @@ Compatibility normalization:
 5. Active node must exist before detail render.
 6. Breadcrumb is ancestry-derived.
 7. Search indexes published nodes only.
-8. `/node/:id` remains the canonical deep link.
+8. `/node/:id` remains the canonical deep link and dedicated reading page.
 9. Graph state is derived from the same canonical node registry as explorer/search.
 10. Graph failure must not block list/detail exploration.
 
 ## 7. Graph Surface Contract
 
 - `/map` defaults to Graph view
-- `/node/:id` falls back to Map Explorer view
+- `/node/:id` renders the dedicated node page
 - Graph click routes to `/node/:id`
 - Graph highlight syncs with active explorer node
 - Layout may be stabilized from cache rather than reheated every load
@@ -156,6 +162,7 @@ Compatibility normalization:
 - `npm run dev`
 - `npm run build`
 - `npm run preview`
+- `npm run smoke`
 
 ## 10. Acceptance Checks
 
@@ -166,7 +173,7 @@ Build:
 
 Runtime:
 - `/map` opens graph by default
-- `/node/:id` opens explorer-focused detail view
+- `/node/:id` opens the dedicated node page
 - search routes to canonical node path
 - corpus filtering updates the visible corpus grid
 

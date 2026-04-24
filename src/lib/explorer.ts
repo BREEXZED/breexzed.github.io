@@ -1,8 +1,9 @@
 import type { Node, TabType, Topology, NodeType, NodeStatus, GraphContracts } from '@/types';
 import { Persistence } from './persistence';
-import { renderTreeNav, renderDetailPanel } from '@components/index';
-import { markdownHrefToNodeId } from '@/utils/markdown';
+import { renderTreeNav, renderDetailPanel, renderNodePage } from '@components/index';
+import { resolveMarkdownHrefToSourcePath } from '@/utils/markdown';
 import { GraphStore } from './graph-store';
+import { Router } from './router';
 
 type ExplorerApi = {
   init: () => Promise<void>;
@@ -25,6 +26,7 @@ let treeOrder: string[] = [];
 let activeNode = 'root';
 let activeTab: TabType = 'explorer';
 let breadcrumb: string[] = ['root'];
+let sourcePathToNodeId = new Map<string, string>();
 
 function normalizeType(type?: string): NodeType {
   const raw = String(type || 'note').trim().toLowerCase();
@@ -37,11 +39,27 @@ function normalizeNode(input: NodeDraft): Node {
     ...input,
     type: normalizeType(input.type),
     status: input.status || 'published',
+    source: input.source || null,
+    sourcePath: input.sourcePath || '',
     featured: input.featured ?? false,
     children: Array.isArray(input.children) ? input.children : [],
     tags: Array.isArray(input.tags) ? input.tags : [],
     parent: input.parent || null
   };
+}
+
+function buildSourcePathIndex(nextNodes: Record<string, Node>): Map<string, string> {
+  return new Map(
+    Object.values(nextNodes)
+      .filter(node => Boolean(node.sourcePath))
+      .map(node => [node.sourcePath, node.id])
+  );
+}
+
+function resolveMarkdownHrefToNodeId(currentNode: Node, href: string): string | null {
+  const sourcePath = resolveMarkdownHrefToSourcePath(currentNode.sourcePath, href);
+  if (!sourcePath) return null;
+  return sourcePathToNodeId.get(sourcePath) || null;
 }
 
 function resolveHashToNode(rawHash: string): string | null {
@@ -110,13 +128,64 @@ function bindDetailInteractions(panel: HTMLElement): void {
     el.addEventListener('click', () => navigate(id));
   });
 
+  panel.querySelectorAll<HTMLButtonElement>('[data-open-node-page]').forEach(button => {
+    button.addEventListener('click', () => {
+      Router.navigateToNode(activeNode);
+    });
+  });
+
   panel.querySelectorAll<HTMLAnchorElement>('.node-content a').forEach(link => {
+    const currentNode = nodes[activeNode];
     const href = link.getAttribute('href');
-    if (!href || !href.endsWith('.md')) return;
+    if (!currentNode || !href) return;
     link.addEventListener('click', e => {
+      const nodeId = resolveMarkdownHrefToNodeId(currentNode, href);
+      if (!nodeId || !nodes[nodeId]) return;
       e.preventDefault();
-      const nodeId = markdownHrefToNodeId(href);
-      if (nodes[nodeId]) navigate(nodeId);
+      Router.navigateToNode(nodeId);
+    });
+  });
+}
+
+function bindNodePageInteractions(surface: HTMLElement): void {
+  const currentNode = nodes[activeNode];
+
+  surface.querySelectorAll<HTMLElement>('.bc-item').forEach(item => {
+    const id = item.dataset.id;
+    if (!id || id === activeNode) return;
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', () => {
+      if (id === 'root') {
+        Router.navigate('/');
+        return;
+      }
+      Router.navigateToNode(id);
+    });
+  });
+
+  surface.querySelectorAll<HTMLElement>('[data-node-route]').forEach(card => {
+    const id = card.dataset.nodeRoute;
+    if (!id) return;
+    card.addEventListener('click', () => {
+      Router.navigateToNode(id);
+    });
+  });
+
+  surface.querySelectorAll<HTMLButtonElement>('[data-node-open-map]').forEach(button => {
+    button.addEventListener('click', () => {
+      Router.navigate('/map');
+    });
+  });
+
+  if (!currentNode) return;
+  surface.querySelectorAll<HTMLAnchorElement>('.node-content a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href) return;
+    link.addEventListener('click', event => {
+      const nodeId = resolveMarkdownHrefToNodeId(currentNode, href);
+      if (!nodeId || !nodes[nodeId]) return;
+      event.preventDefault();
+      Router.navigateToNode(nodeId);
     });
   });
 }
@@ -135,6 +204,21 @@ function renderDetail(): void {
     sanitizeMarkdown: true
   });
   bindDetailInteractions(panel);
+}
+
+function renderNodeRoute(): void {
+  const surface = document.getElementById('node-page-shell');
+  if (!surface) return;
+  const node = nodes[activeNode];
+  if (!node) return;
+
+  surface.innerHTML = renderNodePage({
+    node,
+    breadcrumb,
+    nodes,
+    sanitizeMarkdown: true
+  });
+  bindNodePageInteractions(surface);
 }
 
 function handleHashChange(): void {
@@ -163,6 +247,7 @@ function navigate(id: string, options: NavigateOptions = {}): void {
   if (!panel) {
     buildTree();
     renderDetail();
+    renderNodeRoute();
     return;
   }
 
@@ -173,6 +258,7 @@ function navigate(id: string, options: NavigateOptions = {}): void {
   window.setTimeout(() => {
     buildTree();
     renderDetail();
+    renderNodeRoute();
     panel.style.opacity = '1';
     panel.style.transform = 'none';
     panel.style.transition = 'opacity 0.26s ease 0.04s, transform 0.26s ease 0.04s';
@@ -190,6 +276,7 @@ async function init(): Promise<void> {
     nodes = Object.fromEntries(
       Object.entries(topology.nodes || {}).map(([id, n]) => [id, normalizeNode(n as NodeDraft)])
     );
+    sourcePathToNodeId = buildSourcePathIndex(nodes);
     treeOrder = Array.isArray(topology.treeOrder) ? topology.treeOrder : [];
     GraphStore.hydrate(nodes);
 
@@ -207,6 +294,7 @@ async function init(): Promise<void> {
 
     buildTree();
     renderDetail();
+    renderNodeRoute();
     window.addEventListener('hashchange', handleHashChange);
     console.log(`✓ Topology loaded: ${topology.nodeCount} nodes`);
   } catch (err) {

@@ -1,4 +1,4 @@
-export type NodeType = 'note' | 'projects' | 'essay' | 'page' | 'articulation' | 'signal' | 'trail' | 'concept';
+export type NodeType = 'root' | 'note' | 'projects' | 'essay' | 'page' | 'articulation' | 'signal' | 'trail' | 'concept';
 
 export type NodeStatus = 'draft' | 'published' | 'archived' | 'private';
 
@@ -19,7 +19,8 @@ export interface Node {
   glyph: string;
   tags: string[];
   date: string;
-  source: string;
+  source: string | null;
+  sourcePath: string;
   type: NodeType;
   featured?: boolean;
   thumbnail?: string;

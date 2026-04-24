@@ -16,4 +16,6 @@ tags:
   - entropy
   - trail
 ---
-A small trail confirming that entropy is not an abstract idea here but a recurring pressure visible in everyday experience, mood, and environment.
+I noticed this trail through the ordinary evidence of things slipping out of ideal form: a room requiring reordering, attention fragmenting under pressure, plans losing coherence faster than expected. None of it was dramatic, but all of it carried the same signature.
+
+What made it worth keeping was the repetition. Entropy was not showing up as an abstraction to think about later. It was already present as a pressure shaping the texture of the day.

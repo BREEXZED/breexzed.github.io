@@ -2,15 +2,16 @@ import { Explorer } from './explorer';
 
 type RouteKey = 'home' | 'map' | 'corpus' | 'signals' | 'projects' | 'node';
 
-const ALL_SECTIONS = ['home', 'corpus', 'map', 'signals', 'projects'];
+const ALL_SECTIONS = ['home', 'corpus', 'map', 'signals', 'projects', 'node-page'];
+const HOME_SECTIONS = ['home', 'corpus', 'map', 'signals', 'projects'];
 
 const ROUTE_SECTIONS: Record<RouteKey, string[]> = {
-  home: ALL_SECTIONS,
+  home: HOME_SECTIONS,
   map: ['map'],
   corpus: ['corpus'],
   signals: ['signals'],
   projects: ['projects'],
-  node: ['map']
+  node: ['node-page']
 };
 
 function normalizePath(pathname: string): string {
@@ -47,7 +48,7 @@ function setSectionVisibility(ids: string[]): void {
 
 function setActiveNav(pathname: string): void {
   const normalized = normalizePath(pathname);
-  const navPath = normalized.startsWith('/node/') ? '/map' : normalized;
+  const navPath = normalized.startsWith('/node/') ? '' : normalized;
   document.querySelectorAll<HTMLAnchorElement>('nav .nav-links a[data-route]').forEach(link => {
     const href = link.getAttribute('href') || '';
     const active = href === navPath;
@@ -81,8 +82,7 @@ function applyRoute(pathname: string): void {
   window.dispatchEvent(new CustomEvent('route:change', { detail: route }));
 
   if (route.key === 'node' && route.nodeId && Explorer.getNodes()[route.nodeId]) {
-    Explorer.navigate(route.nodeId, { tab: 'content', scrollToMap: false, updateHash: false });
-    document.getElementById('map')?.scrollIntoView({ behavior: 'auto', block: 'start' });
+    Explorer.navigate(route.nodeId, { scrollToMap: false, updateHash: false });
   }
 }
 

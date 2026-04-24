@@ -19,7 +19,9 @@ tags:
   - learning
   - epistemics
 ---
-The learning edge is the moment where not knowing becomes productive instead of humiliating, and uncertainty begins to function as a route rather than a stop sign.
+The learning edge is the point at which not knowing stops feeling like a private embarrassment and starts behaving like a live route. It appears when confusion sharpens into a usable question, and when the question begins to reorganize the way I look, read, test, and return.
+
+I keep this signal close because it is one of the few states that reliably changes me. It is where I can feel understanding beginning, not as certainty, but as contact.
 
 Linked trail:
 - [Learning Note](../trails/learning-note.md)

@@ -10,7 +10,7 @@ const ROOT_DIR = path.resolve(__dirname, '..');
 const NODES_DIR = path.join(ROOT_DIR, 'nodes');
 const OUTPUT_FILE = path.join(ROOT_DIR, 'data', 'topology.json');
 const PUBLIC_OUTPUT_FILE = path.join(ROOT_DIR, 'public', 'data', 'topology.json');
-const VALID_NODE_TYPES = new Set(['note', 'projects', 'essay', 'page', 'articulation', 'signal', 'trail', 'concept']);
+const VALID_NODE_TYPES = new Set(['root', 'note', 'projects', 'essay', 'page', 'articulation', 'signal', 'trail', 'concept']);
 const VALID_SIGNAL_STATUS = new Set(['invisible', 'emerging', 'confirmed', 'shocked']);
 
 function isMissingRequired(frontmatter, field) {
@@ -275,7 +275,8 @@ async function buildTopology() {
       visual: frontmatter.visual || null,
       tags: normalizeTags(frontmatter.tags),
       date: frontmatter.date || new Date().toISOString().split('T')[0],
-      source: normalizeSource(file),
+      source: frontmatter.source || null,
+      sourcePath: normalizeSource(file),
       type,
       featured: frontmatter.featured === true,
       thumbnail: frontmatter.thumbnail || null,

@@ -20,25 +20,24 @@ export class GraphBootstrap {
     this.status = document.getElementById('graph-canvas-status');
     if (!this.shell || !this.host || !this.status) return;
 
-    if (location.pathname.startsWith('/node/')) {
-      this.view = 'explorer';
-    }
-
     this.bindViewControls();
     this.renderView();
-    await this.ensureGraphMounted();
+    if (!location.pathname.startsWith('/node/')) {
+      await this.ensureGraphMounted();
+    }
 
     if (!this.listening) {
       window.addEventListener('explorer:node-change', (event: Event) => {
         const detail = (event as CustomEvent<{ nodeId?: string }>).detail;
         if (!detail?.nodeId) return;
+        if (location.pathname.startsWith('/node/')) return;
         this.engine?.setActiveNode(detail.nodeId);
       });
 
       window.addEventListener('route:change', (event: Event) => {
         const detail = (event as CustomEvent<{ key?: string }>).detail;
         if (detail?.key === 'node') {
-          void this.setView('explorer');
+          this.destroyGraph();
           return;
         }
         if (detail?.key === 'map' || detail?.key === 'home') {
@@ -122,7 +121,6 @@ export class GraphBootstrap {
         container: this.host,
         contracts,
         onNodeSelect: nodeId => {
-          void this.setView('explorer');
           Router.navigateToNode(nodeId);
         }
       });

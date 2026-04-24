@@ -60,7 +60,7 @@ function resolveAssetPath(nodeSource, assetValue) {
 
 function rewriteNodeAssets(topology, copiedMap) {
   for (const node of Object.values(topology.nodes || {})) {
-    const source = node.source || '';
+    const source = node.sourcePath || '';
 
     for (const field of ['visual', 'thumbnail']) {
       const current = node[field];
